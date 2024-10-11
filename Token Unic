@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PhoenixToken is ERC20, Ownable {
+    constructor() ERC20("Phoenix", "PHX") Ownable(msg.sender) {
+        // Создаем 100,000,000 токенов и отдаем их владельцу контракта
+        _mint(msg.sender, 100000000 * 10 ** decimals());
+    }
+
+    /**
+     * @dev Сжигает указанное количество токенов.
+     * @param amount Количество токенов для сжигания.
+     */
+    function burn(uint256 amount) public {
+        _burn(msg.sender, amount);
+    }
+}
